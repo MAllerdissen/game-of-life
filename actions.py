@@ -3,9 +3,9 @@ This modules functions are events which can occure
 Functions:
   mdown(x, y, positions)
     add or remove the position from list of positions to highlight
-  spacebar(paused)
+  spacebar(playing)
     play or pause the game when press spacebar key
-  clear(position, paused, count)
+  clear(position, playing, count)
     reset game and pause the game
   genearte(position)
     genearte pos to fill board with tiles
@@ -38,44 +38,44 @@ def mdown(x, y, positions):
   else:
     positions.add(pos)
 
-def spacebar(paused):
+def spacebar(playing):
   """
   This function pauses or unpauses the game when spacebar key is pressed
   Paramater: 
-    paused: if the game is running or not
+    playing: if the game is running or not
       dataType: boolean
   Return: 
-    paused: if the game is running or not
+    playing: if the game is running or not
       dataType: boolean
   """
-  if paused == True:
-    paused = False
+  if playing == True:
+    playing = False
   else:
-    paused = True
-  return paused
+    playing = True
+  return playing
 
-def clear(positions, paused, count):
+def clear(positions, playing, count):
   """
   This function clears the game when c key is pressed as well as pausing and reseting the count
   Paramater: 
     positions: set of the (x, y) cordinates of tiles on grid that are alive
       dataType: set[tupple]
-    paused: if the game is running or not
+    playing: if the game is running or not
       dataType: boolean
     count: increment that resets when hitting 120
       dataType: int
   Return: 
     positions: set of the (x, y) cordinates of tiles on grid that are alive
       dataType: set[tupple]
-    paused: if the game is running or not
+    playing: if the game is running or not
       dataType: boolean
     count: increment that resets when hitting 120
       dataType: int
   """
   positions = set()
-  paused = True
+  playing = False
   count = 0
-  return positions, paused, count
+  return positions, playing, count
 
 def generate(positions):
   """

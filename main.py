@@ -5,7 +5,7 @@ This program runs conways game of life
     grid - 46x46 grid of square tiles
     turn - rules of game applied to grid
     rules:
-      1. turn passes every 1 second
+      1. 1 turn per sec
       2. if a alive tile neighbours 2-3 alive tiles it remains alive
       3. if a dead tile neighbours 3 alive tiles it becomes alive
       4. if no previous conditions are met the tile becomes dead
@@ -23,6 +23,7 @@ import constents, render, actions
 pygame.init()
 screen = pygame.display.set_mode((constents.WIDTH, constents.HEIGHT))
 clock = pygame.time.Clock()
+
 def main():
   """
   main function initalizes the game and updates on a 60 FPS clock.
@@ -30,24 +31,24 @@ def main():
   Return: n/a
   """
   running = True
-  paused = True
+  playing = False
   count = 0
   positions = set()
   
   screen.fill(constents.DARK_GRAY) #set background
   
   while running:
-    #--- clock ---
+    #---- clock ----
     clock.tick(constents.FPS)
     
-    if not paused:
+    if playing:
       count += 1
       
     if count >= constents.UPDATE_FREQ: #time until logic applied
       count = 0
       positions = render.adjust_grid(positions)
     
-    #--- logic ---
+    #---- logic ----
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         running = False
@@ -58,16 +59,16 @@ def main():
       
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE:
-          paused = actions.spacebar(paused)
+          playing = actions.spacebar(playing)
           
         if event.key == pygame.K_c:
-          positions, paused, count = actions.clear(positions, paused, count)
+          positions, playing, count = actions.clear(positions, playing, count)
           
         if event.key == pygame.K_g:
           positions = actions.generate(positions)
     
-    #--- update screen ---
-    pygame.display.set_caption("Paused" if paused else "Playing") #update gameplay state 
+    #---- update screen ----
+    pygame.display.set_caption("Paused" if not playing else "Playing") #update gameplay state 
     render.draw_grid(screen, positions)
     pygame.display.update()
   

@@ -14,6 +14,7 @@ Date: Jun 20, 2024
 import pygame
 import constents
 
+#=== Functions ===
 def draw_grid(screen, positions):
   """
   This function uses constents to draw grid with a 0,0 pos system starting in the top left.
@@ -26,12 +27,14 @@ def draw_grid(screen, positions):
   """
   screen.fill(constents.DARK_GRAY)
 
+  #---- draw grid ----
   for row in range(constents.GRID_HEIGHT):
     pygame.draw.line(screen, constents.LIGHT_GRAY, (0, row * constents.TILE_SIZE), (constents.WIDTH, row * constents.TILE_SIZE))
 
   for col in range(constents.GRID_WIDTH):
     pygame.draw.line(screen, constents.LIGHT_GRAY, (col * constents.TILE_SIZE, 0), (col * constents.TILE_SIZE, constents.HEIGHT))
 
+  #---- fill tiles ----
   for pos in positions: #highlight every tile which position is saved
     (col, row) = pos
     top_left = (col * constents.TILE_SIZE, row * constents.TILE_SIZE)
@@ -52,6 +55,7 @@ def adjust_grid(positions):
   all_neighbours = set()
   new_positions = set()
   
+  #---- alive tiles ----
   for pos in positions:
     neighbours = get_neighbours(pos)
     all_neighbours.update(neighbours)
@@ -61,6 +65,7 @@ def adjust_grid(positions):
     if len(neighbours) in [2, 3]:
       new_positions.add(pos)
   
+  #---- neighbours ----
   for pos in all_neighbours:
     neighbours = get_neighbours(pos)
     neighbours = list(filter(lambda x: x in positions, neighbours))

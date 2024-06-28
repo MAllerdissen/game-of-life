@@ -3,12 +3,20 @@ This modules functions are events which can occure
 Functions:
   mdown(x, y, positions)
     add or remove the position from list of positions to highlight
+  spacebar(paused)
+    play or pause the game when press spacebar key
+  clear(position, paused, count)
+    reset game and pause the game
+  genearte(position)
+    genearte pos to fill board with tiles
 Author: Martin Allerdissen
 Date: Jun 20, 2024
 """
+#=== Imports ===
 import random
 import constents
 
+#=== Functions ===
 def mdown(x, y, positions):
   """
   This function handles the mouse down event by using the position of the mouse to either remove or add the position of the tile from position list.
@@ -46,7 +54,7 @@ def spacebar(paused):
     paused = True
   return paused
 
-def c(positions, paused, count):
+def clear(positions, paused, count):
   """
   This function clears the game when c key is pressed as well as pausing and reseting the count
   Paramater: 
@@ -69,7 +77,7 @@ def c(positions, paused, count):
   count = 0
   return positions, paused, count
 
-def g(positions):
+def generate(positions):
   """
   This function assigns random positions to be alive tiles determined using grid width and abitrary values
   Paramater: 

@@ -10,6 +10,7 @@ Functions:
 Author: Martin Allerdissen
 Date: Jun 20, 2024
 """
+#== Imports ==
 import pygame
 import constents
 
@@ -71,7 +72,10 @@ def adjust_grid(positions):
 
 def get_neighbours(pos):
   """
-  This function gets the neighbours of the position given
+  This function gets the neighbours of the position with time complexity n^2 by iterating through each possible combination of the x-displacment (dx) and y-displacment (dy) on the grid
+    | dx:-1,dy: 1 | dx:0,dy: 1 | dx:1,dy: 1 |
+    | dx:-1,dy: 0 | dx:0,dy: 0 | dx:1,dy: 0 |
+    | dx:-1,dy:-1 | dx:0,dy:-1 | dx:1,dy:-1 |
   Paramater: 
     pos: (x, y) cordinates of an alive tile
       dataType: tupple
@@ -81,13 +85,16 @@ def get_neighbours(pos):
   """
   x, y = pos
   neighbours = []
+  
   for dx in [-1, 0, 1]:
-    if x + dx < 0 or x + dx > constents.GRID_WIDTH:
+    if x + dx < 0 or x + dx > constents.GRID_WIDTH: #if the dx pos is outside grid bounds skip
       continue
+    
     for dy in [-1, 0, 1]:
-      if y + dy < 0 or y + dy > constents.GRID_HEIGHT:
+      if y + dy < 0 or y + dy > constents.GRID_HEIGHT: #if the dy pos is outside grid bounds skip
         continue
-      if dx == 0 and dy == 0:
+      
+      if dx == 0 and dy == 0: #if pos has no displacment skip
         continue
       
       neighbours.append((x + dx, y + dy))

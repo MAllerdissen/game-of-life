@@ -10,7 +10,7 @@ Functions:
 Author: Martin Allerdissen
 Date: Jun 20, 2024
 """
-#== Imports ==
+#=== Imports ===
 import pygame
 import constents
 
@@ -25,7 +25,6 @@ def draw_grid(screen, positions):
       dataType: int
   Return: n/a
   """
-  screen.fill(constents.DARK_GRAY)
 
   #---- draw grid ----
   for row in range(constents.GRID_HEIGHT):

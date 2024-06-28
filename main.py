@@ -35,8 +35,6 @@ def main():
   count = 0
   positions = set()
   
-  screen.fill(constents.DARK_GRAY) #set background
-  
   while running:
     #---- clock ----
     clock.tick(constents.FPS)
@@ -70,6 +68,7 @@ def main():
     #---- update screen ----
     pygame.display.set_caption("Paused" if not playing else "Playing") #update gameplay state 
     render.draw_grid(screen, positions)
+    screen.fill(constents.DARK_GRAY)
     pygame.display.update()
   
   pygame.quit()
